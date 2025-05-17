@@ -297,6 +297,7 @@ function Inventory() {
           </div>
         </div>
       )}
+      <p>testing</p>
     </div>
   );
 }

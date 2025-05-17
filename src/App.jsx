@@ -1,6 +1,6 @@
-import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Sidebar from "./Components/Sidebar";
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+
 import MainLayout from './layout/MainLayout';
 import Login from "./pages/Login"; 
 import AuditLog from "./pages/AuditLog";
@@ -9,25 +9,24 @@ import Products from "./pages/Products";
 import Stocks from "./pages/Stocks";
 import Suppliers from './pages/Suppliers';
 import Warehouse from './pages/Warehouse';
+import Dashboard from "./pages/Dashboard";
 
-export default function App() {
+const App = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route element={<MainLayout />}>
-          <Route index element={<Login />} />
-          <Route path="Sidebar" element={<Sidebar />} />
-          <Route path="AuditLog" element={<AuditLog />} />
-          <Route path="Orders" element={<Orders />} />
-          <Route path="Products" element={<Products />} />
-          <Route path="Stocks" element={<Stocks/>} />
-          <Route path="Suppliers" element={<Suppliers />} />
-          <Route path="Warehouse" element={<Warehouse />} />
-        </Route> {/* This closing tag was missing */}
-      </Routes>
-    </BrowserRouter>
-  );
-}
+    <Routes>
+      {/* Route for Login */}
+      <Route path="/login" element={<Login />} />
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App />);
+      {/* Protected Routes inside MainLayout */}
+      <Route path="/" element={<MainLayout><Dashboard /></MainLayout>} />
+      <Route path="/products" element={<MainLayout><Products /></MainLayout>} />
+      <Route path="/warehouses" element={<MainLayout><Warehouse /></MainLayout>} />
+      <Route path="/stocks" element={<MainLayout><Stocks /></MainLayout>} />
+      <Route path="/suppliers" element={<MainLayout><Suppliers /></MainLayout>} />
+      <Route path="/orders" element={<MainLayout><Orders /></MainLayout>} />
+      <Route path="/auditLog" element={<MainLayout><AuditLog /></MainLayout>} />
+    </Routes>
+  );
+};
+
+export default App;
